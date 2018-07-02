@@ -1,0 +1,31 @@
+{
+	"presets": [
+		"react",
+		"env"
+	],
+	"env": {
+		"development": {
+			"plugins": [
+				[
+					"transform-object-rest-spread"
+				],
+				[
+					"transform-react-display-name"
+				],
+			]
+		},
+		"production": {
+			"plugins": [
+				[
+					"transform-object-rest-spread"
+				],
+				[
+					"transform-react-display-name"
+				],
+				[
+					"react-hot-loader/babel"
+				]
+			]
+		}
+	}
+}
