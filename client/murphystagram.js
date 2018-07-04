@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import App from './components/App'
 import Single from './components/Single';
 import PhotoGrid from './components/PhotoGrid';
+import AddPost from './components/AddPost';
 import css from './styles/style.styl';
 import { Router, Route, IndexRoute } from 'react-router';
 import { Provider } from 'react-redux';
@@ -14,6 +15,7 @@ const router = (
       <Route path='/' component={App}>
         <IndexRoute component={PhotoGrid}></IndexRoute>
         <Route path='/view/:postId' component={Single}></Route>
+        <Route path='/addPost' component={AddPost}></Route>
       </Route>
     </Router>
   </Provider>

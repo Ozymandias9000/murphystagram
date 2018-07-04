@@ -25,7 +25,7 @@ class Photo extends Component {
             {post.caption}
           </p>
           <div className='control-buttons'>
-            <button onClick={this.props.increment.bind(null, i)} className='likes'>
+            <button onClick={this.props.increment.bind(null, i, post.code)} className='likes'>
               &hearts; {post.likes}
             </button>
 

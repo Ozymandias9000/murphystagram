@@ -20,6 +20,7 @@
     "babel-preset-react": "^6.5.0",
     "css-loader": "^0.23.1",
     "express": "^4.13.4",
+    "firebase": "^5.2.0",
     "react": "^15.0.2",
     "react-addons-css-transition-group": "^15.0.2",
     "react-dom": "^15.0.2",
@@ -30,6 +31,7 @@
     "react-transform-hmr": "^1.0.4",
     "redbox-react": "^1.2.3",
     "redux": "^3.5.2",
+    "redux-thunk": "^2.3.0",
     "style-loader": "^0.13.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^2.0.0",
@@ -39,6 +41,7 @@
   },
   "devDependencies": {
     "babel-preset-env": "^1.7.0",
-    "react-addons-test-utils": "^15.0.2"
+    "react-addons-test-utils": "^15.0.2",
+    "redux-logger": "^3.0.6"
   }
 }
