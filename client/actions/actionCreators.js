@@ -6,18 +6,25 @@ export function increment(index, postId) {
     postRef.transaction((likes) => {
       return (likes || 0) + 1;
     }, err => {
-      if (err) console.log(err);
+      if (err) dispatch(incrementFailure(err));
       else {
-        dispatch(incrementSuccess(index, postId));
+        dispatch(incrementSuccess(index));
       }
     })
   }
 }
 
-export function incrementSuccess(index, postId) {
+export function incrementSuccess(index) {
   return {
     type: 'INCREMENT_LIKES_SUCCESS',
     index
+  }
+}
+
+export function incrementFailure(err) {
+  return {
+    type: 'INCREMENT_LIKES_FAILURE',
+    err
   }
 }
 

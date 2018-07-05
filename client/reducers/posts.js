@@ -1,5 +1,10 @@
 function posts(state = [], action) {
   switch (action.type) {
+    case 'INCREMENT_LIKES_FAILURE':
+      return {
+        ...state,
+        error: action.err
+      }
     case 'INCREMENT_LIKES_SUCCESS':
       const i = action.index;
       return [
