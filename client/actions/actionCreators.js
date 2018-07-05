@@ -1,4 +1,6 @@
 import { database } from '../config/firebase'
+import { browserHistory } from 'react-router';
+const shortid = require('shortid');
 
 export function increment(index, postId) {
   return (dispatch) => {
@@ -28,26 +30,98 @@ export function incrementFailure(err) {
   }
 }
 
-
-
-
-export function addComment(postId, author, comment) {
-  const postRef = database.ref(`posts/${postId}/comments`);
-  postRef.push({
-    author, comment
-  });
-  return {
-    type: 'ADD_COMMENT',
-    postId,
-    author,
-    comment
+export function addPost(display_src, caption) {
+  const postId = shortid.generate();
+  return dispatch => {
+    const postRef = database.ref(`posts/${postId}/`);
+    postRef.set({
+      display_src,
+      caption,
+      likes: 0
+    }, err => {
+      if (err) dispatch(addPostFailure(err));
+      else {
+        dispatch(addPostSuccess(postId, display_src, caption));
+        browserHistory.push(`/view/${postId}`)
+      }
+    })
   }
 }
 
-export function removeComment(postId, i) {
+export function addPostSuccess(postId, display_src, caption) {
   return {
-    type: 'REMOVE_COMMENT',
+    type: 'ADD_POST_SUCCESS',
+    postId,
+    display_src,
+    caption
+  }
+}
+
+export function addPostFailure(err) {
+  return {
+    type: 'ADD_POST_FAILURE',
+    err
+  }
+}
+
+export function addComment(postId, author, comment) {
+  const commentId = shortid.generate();
+  return dispatch => {
+    const postRef = database.ref(`posts/${postId}/comments/${commentId}`);
+    postRef.set({
+      author, comment
+    }, err => {
+      if (err) dispatch(addCommentFailure(err));
+      else {
+        dispatch(addCommentSuccess(postId, author, comment, commentId))
+      }
+    });
+  }
+}
+
+export function addCommentSuccess(postId, author, comment, commentId) {
+  return {
+    type: 'ADD_COMMENT_SUCCESS',
+    postId,
+    author,
+    comment,
+    commentId
+  }
+}
+
+export function addCommentFailure(err) {
+  return {
+    type: 'ADD_COMMENT_FAILURE',
+    err
+  }
+}
+
+export function removeComment(postId, i, commentId) {
+  return dispatch => {
+    const postRef = database.ref(`posts/${postId}/comments/${commentId}`);
+    postRef.set({
+      author: null,
+      comment: null
+    }, err => {
+      if (err) dispatch(removeCommentFailure(err));
+      else {
+        dispatch(removeCommentSuccess(postId, i))
+      }
+    });
+  }
+}
+
+export function removeCommentSuccess(postId, i) {
+  return {
+    type: 'REMOVE_COMMENT_SUCCESS',
     i,
     postId
+  }
+}
+
+export function removeCommentFailure(err) {
+  return {
+    type: 'REMOVE_COMMENT_FAILURE',
+    err
   }
 }

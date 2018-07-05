@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 
 class Comments extends Component {
   renderComment(comment, i) {
+    const { postId } = this.props.params;
+    const { commentId } = this.props.comments[postId][i];
+    console.log(commentId);
     return (
       <div className='comment' key={i} >
         <p>
@@ -9,7 +12,7 @@ class Comments extends Component {
             {comment.user}
           </strong>
           {comment.text}
-          <button className='remove-comment' onClick={this.props.removeComment.bind(null, this.props.params.postId, i)}>&times;</button>
+          <button className='remove-comment' onClick={this.props.removeComment.bind(null, postId, i, commentId)}>&times;</button>
         </p>
       </div>
     )

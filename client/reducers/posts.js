@@ -1,10 +1,20 @@
 function posts(state = [], action) {
   switch (action.type) {
-    case 'INCREMENT_LIKES_FAILURE':
-      return {
+    case 'ADD_POST_SUCCESS':
+      const { postId, display_src, caption } = action;
+      return [
         ...state,
-        error: action.err
-      }
+        {
+          code: postId,
+          likes: 0,
+          display_src,
+          caption
+        }
+      ]
+    // Work out how to log errors
+    case 'ADD_POST_FAILURE':
+      return state;
+
     case 'INCREMENT_LIKES_SUCCESS':
       const i = action.index;
       return [
@@ -12,6 +22,9 @@ function posts(state = [], action) {
         { ...state[i], likes: state[i].likes + 1 },
         ...state.slice(i + 1)
       ]
+    // Work out how to log errors
+    case 'INCREMENT_LIKES_FAILURE':
+      return state;
     default:
       return state;
   }
