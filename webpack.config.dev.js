@@ -4,6 +4,7 @@ var webpack = require('webpack');
 module.exports = {
   devtool: 'source-map',
   entry: [
+    'babel-polyfill',
     'webpack-hot-middleware/client',
     './client/murphystagram'
   ],
@@ -21,7 +22,7 @@ module.exports = {
       // js
       {
         test: /\.js$/,
-        loaders: ['babel'],
+        loader: ['babel'],
         include: path.join(__dirname, 'client')
       },
       // CSS

@@ -3,6 +3,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { browserHistory } from 'react-router';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
+import 'babel-polyfill';
 
 const logger = createLogger();
 

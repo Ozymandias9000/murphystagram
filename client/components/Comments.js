@@ -4,7 +4,6 @@ class Comments extends Component {
   renderComment(comment, i) {
     const { postId } = this.props.params;
     const { commentId } = this.props.comments[postId][i];
-    console.log(commentId);
     return (
       <div className='comment' key={i} >
         <p>

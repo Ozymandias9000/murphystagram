@@ -125,3 +125,42 @@ export function removeCommentFailure(err) {
     err
   }
 }
+
+export function fetchPosts() {
+  return async dispatch => {
+    dispatch(fetchPostsStart());
+    try {
+      const postsRef = database.ref('posts');
+      const db = await postsRef.once('value');
+      const snapshot = db.val();
+      const data = [];
+      for (let post in snapshot) {
+        const obj = { code: post, ...snapshot[post] };
+        data.push(obj);
+      }
+      return dispatch(fetchPostsSuccess(data));
+    } catch (err) {
+      return dispatch(fetchPostsFailure(err));
+    }
+  }
+}
+
+export function fetchPostsStart() {
+  return {
+    type: 'FETCH_POSTS_START'
+  }
+}
+
+export function fetchPostsSuccess(data) {
+  return {
+    type: 'FETCH_POSTS_SUCCESS',
+    data
+  }
+}
+
+export function fetchPostsFailure(err) {
+  return {
+    type: 'FETCH_POSTS_FAILURE',
+    err
+  }
+}

@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 
 class Main extends Component {
+  componentDidMount() {
+    this.props.fetchPosts();
+  }
+
   render() {
     return (
       <div>

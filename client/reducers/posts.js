@@ -1,5 +1,11 @@
 function posts(state = [], action) {
   switch (action.type) {
+    case 'FETCH_POSTS_START':
+      return state;
+    case 'FETCH_POSTS_SUCCESS':
+      return [...action.data];
+    case 'FETCH_POSTS_FAILURE':
+      return state;
     case 'ADD_POST_SUCCESS':
       const { postId, display_src, caption } = action;
       return [
