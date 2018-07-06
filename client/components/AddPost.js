@@ -13,8 +13,7 @@ class AddPost extends Component {
 
   render() {
     return (
-      <div className='single-photo'>
-        <p>Add new post:</p>
+      <div className='single-photo add-post'>
         <form ref='imgForm' className='comment-form' onSubmit={this.handleSubmit.bind(this)}>
           <input type='text' ref='display_src' placeholder='Image URL' />
           <input type='text' ref='caption' placeholder='Caption' />

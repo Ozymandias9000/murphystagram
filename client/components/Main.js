@@ -14,6 +14,11 @@ class Main extends Component {
             Murphystagram
           </Link>
         </h1>
+        <div className='add-post-container'>
+          <Link to='/addPost'>
+            <button>Add Post</button>
+          </Link>
+        </div>
         {React.cloneElement(this.props.children, this.props)}
       </div>
     )
