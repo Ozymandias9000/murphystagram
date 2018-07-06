@@ -64,12 +64,24 @@ export function addPostFailure(err) {
   }
 }
 
+
 export function addComment(postId, author, comment) {
   const commentId = shortid.generate();
   return dispatch => {
-    const postRef = database.ref(`posts/${postId}/comments/${commentId}`);
-    postRef.set({
-      author, comment
+    // This is adding to database in wrong place.
+    // Reducer sets state in comments property of state
+    // using postId/code and adds commentId.
+    // Adding and removing from state this way works!
+    //
+    // This adds comment to DB under a commentId under comment
+    // under postId/code under posts!
+    // Why not change to how it's done in state?
+    // - need to fetch comments along with posts.
+    // - but dispatch two actions to update separate slices
+    // - of state.
+    const commentRef = database.ref(`comments/${postId}/${commentId}`);
+    commentRef.set({
+      user: author, text: comment
     }, err => {
       if (err) dispatch(addCommentFailure(err));
       else {
@@ -98,10 +110,11 @@ export function addCommentFailure(err) {
 
 export function removeComment(postId, i, commentId) {
   return dispatch => {
-    const postRef = database.ref(`posts/${postId}/comments/${commentId}`);
-    postRef.set({
-      author: null,
-      comment: null
+    const commentRef = database.ref(`comments/${postId}/${commentId}`);
+    commentRef.set({
+      user: null,
+      text: null,
+      commentId: null
     }, err => {
       if (err) dispatch(removeCommentFailure(err));
       else {
@@ -129,18 +142,38 @@ export function removeCommentFailure(err) {
 export function fetchPosts() {
   return async dispatch => {
     dispatch(fetchPostsStart());
+    dispatch(fetchCommentsStart());
+
     try {
       const postsRef = database.ref('posts');
       const db = await postsRef.once('value');
-      const snapshot = db.val();
+      const postSnapshot = db.val();
       const data = [];
-      for (let post in snapshot) {
-        const obj = { code: post, ...snapshot[post] };
+      for (let post in postSnapshot) {
+        const obj = { code: post, ...postSnapshot[post] };
         data.push(obj);
       }
-      return dispatch(fetchPostsSuccess(data));
+      dispatch(fetchPostsSuccess(data));
     } catch (err) {
-      return dispatch(fetchPostsFailure(err));
+      dispatch(fetchPostsFailure(err));
+    }
+
+    try {
+      const commentsRef = database.ref('comments');
+      const db = await commentsRef.once('value');
+      const commentSnapshot = db.val();
+      const data = {};
+      for (let postId in commentSnapshot) {
+        const arr = [];
+        for (let comment in commentSnapshot[postId]) {
+          arr.push(commentSnapshot[postId][comment]);
+        }
+        data[postId] = arr;
+      }
+      // console.log(data)
+      dispatch(fetchCommentsSuccess(data));
+    } catch (err) {
+      dispatch(fetchCommentsFailure(err));
     }
   }
 }
@@ -161,6 +194,26 @@ export function fetchPostsSuccess(data) {
 export function fetchPostsFailure(err) {
   return {
     type: 'FETCH_POSTS_FAILURE',
+    err
+  }
+}
+
+export function fetchCommentsStart() {
+  return {
+    type: 'FETCH_COMMENTS_START'
+  }
+}
+
+export function fetchCommentsSuccess(data) {
+  return {
+    type: 'FETCH_COMMENTS_SUCCESS',
+    data
+  }
+}
+
+export function fetchCommentsFailure(err) {
+  return {
+    type: 'FETCH_COMMENTS_FAILURE',
     err
   }
 }

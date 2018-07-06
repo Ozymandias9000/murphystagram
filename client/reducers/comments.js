@@ -28,7 +28,16 @@ function comments(state = [], action) {
       [action.postId]: postComments(state[action.postId], action)
     }
   }
-  return state;
+  switch (action.type) {
+    case 'FETCH_COMMENTS_START':
+      return state;
+    case 'FETCH_COMMENTS_SUCCESS':
+      return action.data;
+    case 'FETCH_COMMENTS_FAILURE':
+      return state;
+    default:
+      return state;
+  }
 }
 
 export default comments;
