@@ -141,8 +141,7 @@ export function removeCommentFailure(err) {
 
 export function fetchPosts() {
   return async dispatch => {
-    dispatch(fetchPostsStart());
-    dispatch(fetchCommentsStart());
+    dispatch(isFetching());
 
     try {
       const postsRef = database.ref('posts');
@@ -175,12 +174,19 @@ export function fetchPosts() {
     } catch (err) {
       dispatch(fetchCommentsFailure(err));
     }
+    dispatch(isFetchingSuccess());
   }
 }
 
-export function fetchPostsStart() {
+export function isFetching() {
   return {
-    type: 'FETCH_POSTS_START'
+    type: 'IS_FETCHING'
+  }
+}
+
+export function isFetchingSuccess() {
+  return {
+    type: 'IS_FETCHING_SUCCESS'
   }
 }
 
@@ -195,12 +201,6 @@ export function fetchPostsFailure(err) {
   return {
     type: 'FETCH_POSTS_FAILURE',
     err
-  }
-}
-
-export function fetchCommentsStart() {
-  return {
-    type: 'FETCH_COMMENTS_START'
   }
 }
 

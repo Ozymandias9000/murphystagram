@@ -9,17 +9,9 @@ const logger = createLogger();
 
 import rootReducer from './reducers/index';
 
-import posts from './data/posts';
-import comments from './data/comments';
-
-const defaultState = {
-  posts,
-  comments
-};
-
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(rootReducer, defaultState, composeEnhancers(applyMiddleware(thunk, logger)));
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk, logger)));
 
 export const history = syncHistoryWithStore(browserHistory, store);
 
