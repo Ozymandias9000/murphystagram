@@ -4,7 +4,7 @@ import App from './components/App'
 import Single from './components/Single';
 import PhotoGrid from './components/PhotoGrid';
 import AddPost from './components/AddPost';
-import css from './styles/style.styl';
+import './styles/style.styl';
 import { Router, Route, IndexRoute } from 'react-router';
 import { Provider } from 'react-redux';
 import store, { history } from './store';

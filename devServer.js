@@ -1,27 +1,24 @@
 var path = require('path');
-var express = require('express');
-var webpack = require('webpack');
-var config = require('./webpack.config.dev');
+var app = require('express')();
+const Bundler = require('parcel-bundler');
 
-var app = express();
-var compiler = webpack(config);
+const file = path.join(__dirname, './index.html');
+const PORT = process.env.PORT || 7770;
 
-app.use(require('webpack-dev-middleware')(compiler, {
-  noInfo: true,
-  publicPath: config.output.publicPath
-}));
+const options = {
+  sourceMaps: false // Enable or disable sourcemaps,
+};
 
-app.use(require('webpack-hot-middleware')(compiler));
+const bundler = new Bundler(file, options);
 
-app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
+// Let express use the bundler middleware, this will let Parcel handle every request over your express server
+app.use(bundler.middleware());
 
-app.listen(7770, 'localhost', function (err) {
+app.listen(PORT, function (err) {
   if (err) {
     console.log(err);
     return;
   }
 
-  console.log('Listening at http://localhost:7770');
+  console.log(`Listening at PORT ${PORT}`);
 });
