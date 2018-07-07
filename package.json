@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": ":)",
   "scripts": {
-    "start": "node ./dist/murphystagram.dc851860.js"
+    "start": "node devServer.js"
   },
   "keywords": [],
   "author": "Nick Murphy",
