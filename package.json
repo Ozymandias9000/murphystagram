@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": ":)",
   "scripts": {
-    "start": "node devServer.js"
+    "start": "node devServer.js",
+    "postinstall": "parcel index.html"
   },
   "keywords": [],
   "author": "Nick Murphy",
