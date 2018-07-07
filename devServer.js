@@ -6,12 +6,11 @@ const file = path.join(__dirname, './index.html');
 const PORT = process.env.PORT || 7770;
 
 const options = {
-  sourceMaps: false // Enable or disable sourcemaps,
+  sourceMaps: false
 };
 
 const bundler = new Bundler(file, options);
 
-// Let express use the bundler middleware, this will let Parcel handle every request over your express server
 app.use(bundler.middleware());
 
 app.listen(PORT, function (err) {
