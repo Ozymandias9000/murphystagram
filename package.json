@@ -3,12 +3,16 @@
   "version": "1.0.0",
   "description": ":)",
   "scripts": {
-    "start": "node devServer.js",
-    "heroku-postbuild": "parcel index.html"
+    "dev": "node devServer.js",
+    "start": "parcel index.html",
+    "postinstall": "parcel build index.html"
   },
   "keywords": [],
   "author": "Nick Murphy",
   "license": "ISC",
+  "engines": {
+    "node": "8.9.3"
+  },
   "dependencies": {
     "babel-core": "^6.26.3",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
