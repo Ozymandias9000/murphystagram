@@ -10,9 +10,9 @@
   "author": "Nick Murphy",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "^7.0.0-beta.52",
-    "@babel/preset-env": "^7.0.0-beta.52",
+    "babel-core": "^6.26.3",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "express": "^4.13.4",
     "firebase": "^5.2.0",
@@ -30,7 +30,6 @@
     "stylus": "^0.54.5"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
     "parcel-bundler": "^1.9.4",
     "react-addons-test-utils": "^15.0.2",
     "redux-logger": "^3.0.6"
