@@ -14,10 +14,10 @@ const router = (
   <Provider store={store}>
     <Router history={history}>
       <Route path='/' component={App}>
-        <IndexRoute component={PhotoGrid}></IndexRoute>
-        <Route path='/view/:postId' component={Single}></Route>
-        <Route path='/addPost' component={AddPost}></Route>
-        <Route path="*" exact={true} component={NoMatch}></Route>
+        <IndexRoute component={PhotoGrid} />>>>>>
+        <Route path='/view/:postId' component={Single} />
+        <Route path='/addPost' component={AddPost} />
+        <Route path="*" exact={true} component={NoMatch} />
       </Route>
     </Router>
   </Provider>
