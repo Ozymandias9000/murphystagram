@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "node devServer.js",
     "start": "parcel index.html",
-    "buildGitHub": "parcel build index.html -d docs --public-url ./murphystagram/",
+    "buildGitHub": "parcel build index.html -d docs",
     "build": "parcel build index.html",
     "postinstall": "yarn build"
   },
