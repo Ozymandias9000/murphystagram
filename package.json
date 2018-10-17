@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "node devServer.js",
     "start": "parcel index.html",
-    "build": "parcel build index.html -d docs",
+    "buildGitHub": "parcel build index.html -d docs --public-url ./docs/",
+    "build": "parcel build index.html",
     "postinstall": "yarn build"
   },
   "keywords": [],
