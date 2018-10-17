@@ -1331,4 +1331,4 @@ module.exports=function(n){return new Promise(function(e,o){var r=document.creat
 },{}],0:[function(require,module,exports) {
 var b=require("z1Am");b.register("js",require("Ijyk"));
 },{}]},{},[0,"QYDq"], null)
-//# sourceMappingURL=/murphystagram.d30bc364.map
+//# sourceMappingURL=murphystagram/murphystagram.d30bc364.map

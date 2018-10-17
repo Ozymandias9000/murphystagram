@@ -6,4 +6,4 @@ var t=require("process");function e(t){return t&&"object"==typeof t&&"default"in
 },{"@firebase/util":"rrEo","@firebase/logger":"srlT","tslib":"CvJj","@firebase/app":"6QzT","process":"g5I+"}],"hCmk":[function(require,module,exports) {
 "use strict";require("@firebase/database");
 },{"@firebase/database":"ekyg"}]},{},[], null)
-//# sourceMappingURL=/index.esm.183ae917.map
+//# sourceMappingURL=murphystagram/index.esm.183ae917.map
