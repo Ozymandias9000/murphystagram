@@ -5,17 +5,19 @@
   "scripts": {
     "dev": "node devServer.js",
     "start": "parcel index.html",
-    "postinstall": "parcel build index.html"
+    "build": "parcel build index.html -d docs",
+    "postinstall": "yarn build"
   },
   "keywords": [],
   "author": "Nick Murphy",
   "license": "ISC",
   "engines": {
-    "node": "8.9.3"
+    "node": "^10.1.0"
   },
   "dependencies": {
     "babel-core": "^6.26.3",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "express": "^4.13.4",
